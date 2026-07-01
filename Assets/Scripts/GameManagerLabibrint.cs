@@ -5,8 +5,8 @@ public class GameManagerLabibrint : MonoBehaviour
     [SerializeField] private GameObject _ball;
     [SerializeField] private Transform _startTarget;
     [SerializeField] private Transform _startTargetPlatform;
-
     [SerializeField] private GameObject _platform;
+
 
     private float _timer;
 
