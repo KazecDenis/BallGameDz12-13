@@ -171,11 +171,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1e7d6ddfd9d418a8b602355684f09b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballController: {fileID: 710662677}
+  _ballController: {fileID: 710662677}
   _winCountDiamond: 22
   _wastedTime: 60
   _startBallPosition: {fileID: 144383998}
-  _diamonds: []
+  _diamonds:
+  - {fileID: 278348285}
+  - {fileID: 1188318297}
+  - {fileID: 363582001}
+  - {fileID: 1889943307}
+  - {fileID: 937131208}
+  - {fileID: 436287314}
+  - {fileID: 1381685837}
+  - {fileID: 181049080}
+  - {fileID: 739234897}
+  - {fileID: 805933171}
+  - {fileID: 1824645288}
+  - {fileID: 1235774176}
+  - {fileID: 1440432349}
+  - {fileID: 239569522}
+  - {fileID: 614011843}
+  - {fileID: 1695157131}
+  - {fileID: 1647680234}
+  - {fileID: 1029983328}
+  - {fileID: 1130199510}
+  - {fileID: 349746274}
+  - {fileID: 1274889321}
+  - {fileID: 1248657248}
 --- !u!4 &90885659 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 60f890405c12c464b95dde6d02b0b5fd, type: 3}

@@ -12,16 +12,12 @@ public class Diamont : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ball"))
+        if (other.gameObject == ballController.gameObject)
         {
             DeadEffectON();
-            TakeDiamondTo();
+            ballController.TakeDiamond(_reward);
             gameObject.SetActive(false);
         }
-    }
-    private void TakeDiamondTo()
-    {
-        ballController.GetComponent<BallController>().TakeDiamond(_reward);      
     }
     public void DeadEffectON()
     {

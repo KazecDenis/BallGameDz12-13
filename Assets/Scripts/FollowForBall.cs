@@ -7,8 +7,8 @@ public class FollowForBall : MonoBehaviour
 
     private void LateUpdate()
     {
-
         transform.position = _target.transform.position + _offSet;
-
     }
 }
+
+

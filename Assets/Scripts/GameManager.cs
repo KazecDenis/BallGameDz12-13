@@ -5,52 +5,39 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] BallController ballController;
+    [SerializeField] private BallController _ballController;
     [SerializeField] private int _winCountDiamond;
     [SerializeField] private float _wastedTime;
     [SerializeField] private Transform _startBallPosition;
     [SerializeField] private GameObject[] _diamonds;
     private const string _restartMassage = "нажмите клавишу F для перезагрузки уровня.";
+    private Rigidbody _ballRigidbody;
 
-
-    private bool isGameOver;
+    private bool _isGameOver;
     private float _timer;
-    
-    private float Timer() => _timer;
-
-    private void Start()
-    {
-        _diamonds = GameObject.FindGameObjectsWithTag("Diamonds");
-    }
 
     private void Awake()
     {
-        ballController.GetComponent<BallController>().ResetPosition(_startBallPosition);
+        _ballRigidbody = _ballController.GetComponent<Rigidbody>();
+        _ballController.ResetPosition(_startBallPosition);
     }
 
     private void Update()
     {
 
-        if (isGameOver == false)
+        if (_isGameOver == false)
         {
             _timer += Time.deltaTime;
-            Debug.Log(Timer().ToString("F2"));
+            Debug.Log(_timer.ToString("F2"));
 
             if (_timer >= _wastedTime)
             {
                 ProcessOverGame();
-                if (ballController.DiamondCount() < _winCountDiamond && _timer >= _wastedTime)
-                {
-                    Debug.Log($"вы не успели собрать {_winCountDiamond} алмазов за {Timer().ToString("F2")} сек.");
-                    Debug.Log(_restartMassage);
-                }
-                else
-                {
-                    WinProcessGame();
-                    Debug.Log(_restartMassage);
-                }
+                
+                Debug.Log($"вы не успели собрать {_winCountDiamond} алмазов за {_timer.ToString("F2")} сек.");
+                Debug.Log(_restartMassage);
             }
-            else if (ballController.DiamondCount() >= _winCountDiamond)
+            else if (_ballController.DiamondCount() >= _winCountDiamond)
             {
                 ProcessOverGame();
                 WinProcessGame();
@@ -68,9 +55,9 @@ public class GameManager : MonoBehaviour
 
     private void ProcessOverGame()
     {
-        ballController.GetComponent<Rigidbody>().isKinematic = true;
-        Debug.Log($"прошло - {Timer().ToString("F2")} сек. у вас {ballController.DiamondCount()} алмазов");
-        isGameOver = true;
+        _ballRigidbody.isKinematic = true;
+        Debug.Log($"прошло - {_timer.ToString("F2")} сек. у вас {_ballController.DiamondCount()} алмазов");
+        _isGameOver = true;
     }
 
     private void WinProcessGame()
@@ -86,10 +73,11 @@ public class GameManager : MonoBehaviour
             diamond.SetActive(true);
         }
 
-        ballController.ResetPosition(_startBallPosition);
-        ballController.GetComponent<Rigidbody>().isKinematic = false;
-        ballController.ResetDiamond();
+        _ballController.ResetPosition(_startBallPosition);
+        _ballRigidbody.isKinematic = false;
+        _ballRigidbody.velocity = Vector3.zero;
+        _ballController.ResetDiamond();
         ResetTimer();
-        isGameOver = false;
+        _isGameOver = false;
     }
 }

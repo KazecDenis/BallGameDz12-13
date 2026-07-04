@@ -7,13 +7,14 @@ public class GameManagerLabibrint : MonoBehaviour
     [SerializeField] private Transform _startTargetPlatform;
     [SerializeField] private GameObject _platform;
 
-
+    private Rigidbody _ballRigidbody;
     private float _timer;
 
     private bool _isGame = true;
 
     private void Awake()
     {
+        _ballRigidbody = _ball.GetComponent<Rigidbody>();
         ResetPositionBall();
         ResetRotationPlatform();
         ResetPositionPlatform();
@@ -45,7 +46,7 @@ public class GameManagerLabibrint : MonoBehaviour
     {
         Debug.Log("Вы победили!");
         Debug.Log($"Вы добрались до финала за {_timer.ToString("F2")} сек");
-        _ball.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        _ballRigidbody.isKinematic = true;
         _isGame = false;
     }
 
@@ -57,7 +58,8 @@ public class GameManagerLabibrint : MonoBehaviour
 
     private void RestartGame()
     {
-        _ball.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        _ballRigidbody.isKinematic = false;
+        _ballRigidbody.velocity = Vector3.zero;
         ResetRotationPlatform();
         ResetPositionBall();
         ResetPositionPlatform();
